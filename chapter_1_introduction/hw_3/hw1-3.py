@@ -11,20 +11,18 @@ import sys
 
 @bottle.get("/hw1/<n>")
 def get_hw1(n):
-
     # connect to the db on standard port
     connection = pymongo.MongoClient("mongodb://localhost")
 
     n = int(n)
 
-    db = connection.m101                 # attach to db
-    collection = db.funnynumbers         # specify the collection
-
+    db = connection.m101  # attach to db
+    collection = db.funnynumbers  # specify the collection
 
     magic = 0
 
     try:
-        iter = collection.find({},limit=1, skip=n).sort('value', direction=1)
+        iter = collection.find({}, limit=1, skip=n).sort('value', direction=1)
         for item in iter:
             return str(int(item['value'])) + "\n"
     except Exception as e:
